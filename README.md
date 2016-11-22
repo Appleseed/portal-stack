@@ -1,2 +1,4 @@
 # portal-stack
-Appleseed Portal Stack Docker composition. Uses Mono, DotNet, ASPNet, SQL Server
+Appleseed Portal Stack Docker composition : https://github.com/Appleseed/portal/
+
+Uses DotNet, ASPNet, SQL Server
