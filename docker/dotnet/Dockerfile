@@ -1,7 +1,5 @@
-# Testing on 1.0.9 Release located : https://github.com/Appleseed/portal/releases
-# Since Powershell has weak Unzip ability, simply unzip the latest zip package into
-# the folder before running this docker File
-
+# Testing on 1.1.0.0 Release located : https://github.com/Appleseed/portal/releases
+ 
 FROM microsoft/iis:windowsservercore 
 SHELL ["powershell"]
 
@@ -11,9 +9,11 @@ MAINTAINER ANANT Corporation <info@anant.us>
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
     Install-WindowsFeature Web-Asp-Net45
 
-#Seup Env for Unzip
+
 RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
+
+#Setup Unzip
 RUN [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
 
 # Using Add for now.  To-do : Should use wget 
