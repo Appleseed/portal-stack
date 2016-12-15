@@ -21,7 +21,8 @@ RUN Add-Type -Path "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\System.
 ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Portal.1.1.0.0.zip c:\\Appleseed
 
 #Unzip the main archive
-Exec [System.IO.Compression.ZipFile]::ExtractToDirectory("c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip", "c:\\Appleseed\\Portal")
+ 
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
 
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  
