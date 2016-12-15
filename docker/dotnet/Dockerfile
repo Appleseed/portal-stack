@@ -9,7 +9,7 @@ MAINTAINER ANANT Corporation <info@anant.us>
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
     Install-WindowsFeature Web-Asp-Net45
 
-
+#Setup Working Directories
 RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
 
@@ -19,12 +19,15 @@ RUN [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.Fil
 # Using Add for now.  To-do : Should use wget 
 ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Portal.1.1.0.0.zip c:\\Appleseed
 
+#Unzip the main archive
 RUN [System.IO.Compression.ZipFile]::ExtractToDirectory("c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip", "c:\\Appleseed\Portal")
 
+#Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  
 RUN New-Website -Name 'Appleseed.Portal' -Port 80 \  
     -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
 EXPOSE 80
 
+#Make sure IIS comes up
 CMD Write-Host IIS Started... ; \  
     while ($true) { Start-Sleep -Seconds 3600 }
