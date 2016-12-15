@@ -12,7 +12,8 @@ RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \
     Install-WindowsFeature Web-Asp-Net45
 
 #Seup Env for Unzip
-
+RUN MD C:\\Appleseed
+WORKDIR C:\\Appleseed
 RUN [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
 
 # Using Add for now.  To-do : Should use wget 
