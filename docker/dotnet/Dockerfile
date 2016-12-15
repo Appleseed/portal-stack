@@ -14,7 +14,7 @@ RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
 
 #Setup Unzip
-RUN [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") | Out-Null
+RUN [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") 
 
 # Using Add for now.  To-do : Should use wget 
 ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Portal.1.1.0.0.zip c:\\Appleseed
