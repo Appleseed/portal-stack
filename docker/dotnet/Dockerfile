@@ -15,7 +15,7 @@ WORKDIR C:\\Appleseed
 
 #Setup Unzip
 #RUN [System.Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem") 
-RUN Add-Type -Path "C:\\Program Files `(x86`)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.5\\System.IO.Compression.FileSystem.dll"
+RUN Add-Type -Path "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\System.IO.Compression.FileSystem.dll"
 
 # Using Add for now.  To-do : Should use wget 
 ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Portal.1.1.0.0.zip c:\\Appleseed
