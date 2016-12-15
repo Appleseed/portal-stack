@@ -32,3 +32,5 @@ EXPOSE 80
 #Make sure IIS comes up
 CMD Write-Host IIS Started... ; \  
     while ($true) { Start-Sleep -Seconds 3600 }
+
+ 
