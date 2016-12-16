@@ -1,82 +1,29 @@
-# Build sql server 2014 express image listening on static port 1433,
-# with support for data internal-to-container or on host
-# Credit to : https://github.com/brogersyh/Dockerfiles-for-windows/edit/master/sqlexpress/dockerfile
-# May be customized for any other sql server edition
-#
-# IMAGE USAGE:
-#   detached, data in container:
-#     docker run -d -p <hostport>:1433 <imagename>
-#   detached, data on host:
-#     docker run -d -p <hostport>:1433 -v <hostsqldir>:c:\sql <imagename>
-#
-#   interactive, data in container:
-#     docker run -it -p <hostport>:1433 <imagename> "powershell ./start"
-#   interactive, data on host:
-#     docker run -it -p <hostport>:1433 -v <hostsqldir>:c:\sql <imagename> "powershell ./start"
-#
-#   example: build image then run, teardown two SxX multiple sql server containers with
-#   persistent data volumes on host (detached)
-#     docker build -t sqlexpress .
-#     docker run --name sql -d -p 1433:1433 -v c:\sql:c:\sql  sqlexpress
-#     docker run --name sql2 -d -p 1434:1433 -v c:\sql2:c:\sql sqlexpress
-#     docker stop sql
-#     docker stop sql2
-#     docker rm -f sql
-#     docker rm -f sql2
-#
-# PRECONDITIONS:
-#   Docker context folder must contain the following dependencies:
-#     Set-SqlExpressStaticTcpPort.ps1
-#     Move-dirs-and-stop-service.ps1
-#     start.ps1
-
-# .NET 3.5 required for SQL Server
-FROM docker.io/microsoft/dotnet35:windowsservercore
+# mssql server 2016 SP1 express image
+FROM microsoft/windowsservercore
 
 # maintainer for image metadata
-MAINTAINER ANANT Corporation <info@anant.us>
+# https://github.com/Microsoft/sql-server-samples/blob/master/samples/manage/windows-containers/mssql-server-2016-express-sp1-windows/dockerfile
+MAINTAINER Perry Skountrianos
 
-#note backslash must be escaped in env var as of TP4
-ENV sqlinstance SQL
-ENV sqlsapassword thepassword2#
-ENV sql c:\\sql
-ENV sqldata c:\\sql\\data
-ENV sqlbackup c:\\sql\\backup
+# set environment variables
+ENV sql_express_download_url "https://go.microsoft.com/fwlink/?linkid=829176"
 
-# Expose not supported as of Win2016 TP4
-# EXPOSE 1433
-
-#designate host-mounted volume for data and backups
-# not yet supported as of TP4 - only cmd line "-v"
-# VOLUME ["%sql%"]
+ENV sa_password _
+ENV attach_dbs "[]"
+ENV ACCEPT_EULA _
 
 # make install files accessible
-COPY . /install
+COPY . /
+WORKDIR /
 
-WORKDIR /install
+# download and install Microsoft SQL 2016 Express Edition in one step
+RUN powershell -Command (New-Object System.Net.WebClient).DownloadFile('%sql_express_download_url%', 'sqlexpress.exe') && /sqlexpress.exe /qs /x:setup && /setup/setup.exe /q /ACTION=Install /INSTANCENAME=SQLEXPRESS /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS && del /F /Q sqlexpress.exe && rd /q /s setup
 
-# BEGIN sql-express-download-in-one-step section
-# Download sql express 2014 engine-only installer
-# Note: High-permission System account must be used for SQL Server as of Win 2016 TP4
-# if verbose install log to console desired, use this:
-# /INDICATEPROGRESS="true"
-# If internet access not present, must disable updates as follows:
-# /UPDATEENABLED=0
-# if installing SQL EXPRESS - change from default dynamic TCP port to static 1433
-# reduce image size by removing installer setup files
-# allow docker volume map to data, backup dirs by renaming / deleting them, to allow cmd-line mapping
-# this is due to a TP4 volume-mapping limitation, where container dirs must not exist before being mapped during "docker run"
-# Remove large setup files
-RUN powershell wget http://download.microsoft.com/download/E/A/E/EAE6F7FC-767A-4038-A954-49B8B05D04EB/Express%2064BIT/SQLEXPR_x64_ENU.exe \
-      -OutFile sqlexpr_x64_enu.exe \
-  && /install/sqlexpr_x64_enu.exe /q /x:/install/setup \
-  && /install/setup/setup.exe /q /ACTION=Install /INSTANCENAME=%sqlinstance% /FEATURES=SQLEngine /UPDATEENABLED=1 \
-      /SECURITYMODE=SQL /SAPWD=%sqlsapassword% /SQLSVCACCOUNT="NT AUTHORITY\System"  /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" \
-      /INSTALLSQLDATADIR=%sqldata% /SQLUSERDBLOGDIR=%sqldata% /SQLBACKUPDIR=%sqlbackup% \
-      /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS \
-  && powershell ./Set-SqlExpressStaticTcpPort %sqlinstance% \
-  && powershell ./Move-dirs-and-stop-service %sqlinstance% %sql% %sqldata% %sqlbackup% \
-  && del sqlexpr_x64_enu.exe \
-  && rmdir .\setup /s /q
+RUN powershell -Command \
+        set-strictmode -version latest ; \
+        stop-service MSSQL`$SQLEXPRESS ; \
+        set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\supersocketnetlib\tcp\ipall' -name tcpdynamicports -value '' ; \
+        set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\supersocketnetlib\tcp\ipall' -name tcpport -value 1433 ; \
+        set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\' -name LoginMode -value 2 ;
 
-CMD powershell ./start detached %sqlinstance% %sqldata% %sqlbackup%
+CMD powershell ./start -sa_password %sa_password% -ACCEPT_EULA %ACCEPT_EULA% -attach_dbs \"%attach_dbs%\" -Verbose
