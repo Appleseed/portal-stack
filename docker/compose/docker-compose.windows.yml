@@ -2,9 +2,9 @@ version: '2.1'
 services:
   db:
     build:
-     context: .
+     context: ..\
      #Testing direct file for now
-     dockerfile: portal-stack/docker/sql/Dockerfile
+     dockerfile: \sql\Dockerfile
     environment:
       sa_password: "Password1"
     ports:
@@ -12,9 +12,9 @@ services:
 
   web:
     build:
-      context: .
+      context: ..\
       # Testing direct file for now
-      dockerfile: portal-stack/docker//portal/windows/Dockerfile
+      dockerfile: portal\windows\Dockerfile
     environment:
      # - "Data:DefaultConnection:ConnectionString=Server=db,1433;Database=MusicStore;User Id=sa;Password=Password1;MultipleActiveResultSets=True"
     depends_on:
