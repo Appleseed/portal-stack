@@ -28,7 +28,8 @@ RUN New-Website -Name 'Appleseed.Portal' -Port 80 \
     -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool 'Portal'
 
 #Set Application Pool to Value 2 : Network Service
-RUN Set-ItemProperty IIS:\AppPools\Portal -name processModel.identityType -value 2    
+# Still tweaking the below command
+#RUN Set-ItemProperty IIS:\AppPools\Portal -name processModel.identityType -value 2    
     
 EXPOSE 80
 
