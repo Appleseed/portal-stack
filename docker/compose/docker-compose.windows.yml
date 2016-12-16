@@ -4,7 +4,7 @@ services:
     build:
      context: .
      #Testing direct file for now
-     dockerfile: https://github.com/Appleseed/portal-stack/blob/master/docker/sql/Dockerfile
+     dockerfile: portal-stack/docker/sql/Dockerfile
     environment:
       sa_password: "Password1"
     ports:
@@ -14,7 +14,7 @@ services:
     build:
       context: .
       # Testing direct file for now
-      dockerfile: https://raw.githubusercontent.com/Appleseed/portal-stack/master/docker/portal/windows/Dockerfile
+      dockerfile: portal-stack/docker//portal/windows/Dockerfile
     environment:
      # - "Data:DefaultConnection:ConnectionString=Server=db,1433;Database=MusicStore;User Id=sa;Password=Password1;MultipleActiveResultSets=True"
     depends_on:
