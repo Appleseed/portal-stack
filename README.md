@@ -8,7 +8,7 @@ Uses Windows 2016 Server, IIS, ASPNet, SQL Server
 
 Configure and Install docker-machine, docker, and docker-compose on your machine or server. Windows 2016 Servers have Docker built-in.
 
-- `docker build https://raw.githubusercontent.com/Appleseed/portal-stack/master/docker/dotnet/Dockerfile -t portal`
+- `docker build https://raw.githubusercontent.com/Appleseed/portal-stack/master/docker/portal/windows/Dockerfile -t portal`
 - `docker run -d -p 80:80 --name appleseed portal`
 - `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" appleseed`
 
