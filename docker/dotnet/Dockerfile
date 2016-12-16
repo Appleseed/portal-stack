@@ -7,10 +7,10 @@ MAINTAINER ANANT Corporation <info@anant.us>
 
 #Install .NET 4.6.1 / IIS Management Tools
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
-    Install-WindowsFeature Web-Asp-Net45 ;\
-    Import-Module ServerManager ;\
-    Install-WindowsFeature Web-Scripting-Tools ;\
-    Import-Module WebAdministration
+    Install-WindowsFeature Web-Asp-Net45 
+   # Import-Module ServerManager ;\
+    #Install-WindowsFeature Web-Scripting-Tools ;\
+    #Import-Module WebAdministration
 
 #Setup Working Directories
 RUN MD C:\\Appleseed
