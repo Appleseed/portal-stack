@@ -15,7 +15,7 @@ services:
       context: ..\
       # Testing direct file for now
       dockerfile: portal\windows\Dockerfile
-    environment:
+     #environment:
      # - "Data:DefaultConnection:ConnectionString=Server=db,1433;Database=MusicStore;User Id=sa;Password=Password1;MultipleActiveResultSets=True"
     depends_on:
       - "db"
