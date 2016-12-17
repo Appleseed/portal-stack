@@ -22,8 +22,8 @@ ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Por
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
 
 #Remove the default IIS site and install Appleseed.Portal
-RUN Remove-WebSite -Name 'Default Web Site'  
-RUN New-Website -Name 'Appleseed.Portal' -Port 80 \  
+RUN Remove-WebSite -Name 'Default Web Site'  ;\
+    New-Website -Name 'Appleseed.Portal' -Port 80 \  
     -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
 
 #Set Application Pool to Value 2 : Network Service
