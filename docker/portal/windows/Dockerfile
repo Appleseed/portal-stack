@@ -28,7 +28,7 @@ RUN Remove-WebSite -Name 'Default Web Site'  ;\
 
 #Set Application Pool to Value 2 : Network Service
 RUN Import-Module WebAdministration ;\
-    Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2   
+    Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.userName -value 'NETWORK SERVICE'   
 
 #Make Web.config writable only for Network Service
 RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
