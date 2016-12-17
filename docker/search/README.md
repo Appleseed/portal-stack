@@ -2,5 +2,6 @@
 
 Integrate Appleseed Portal with Appleseed Search
 
-TODO : Create Docker Files
-       Create Compose File
+#TODO 
+- Create Docker Files
+- Create Compose File
