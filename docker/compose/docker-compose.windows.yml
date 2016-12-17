@@ -3,20 +3,21 @@ services:
   db:
     build:
      context: ..\
-     
      dockerfile: \sql\Dockerfile
      environment:
       sa_password: "Password1"
+      ACCEPT_EULA: Y
+      
     ports:
-      - "1433:1433" # REMARK: This is currently required, needs investigation
+      - "1433:1433"
 
   web:
     build:
       context: ..\
-     
       dockerfile: portal\windows\Dockerfile
-     #environment:
-     # - "Data:DefaultConnection:ConnectionString=Server=db,1433;Database=MusicStore;User Id=sa;Password=Password1;MultipleActiveResultSets=True"
+    
+    links:
+     - "db"
     depends_on:
       - "db"
     ports:
