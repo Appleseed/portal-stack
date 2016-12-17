@@ -1,0 +1,27 @@
+# mssql server 2016 SP1 express image
+FROM microsoft/windowsservercore
+
+# maintainer for image metadata
+# https://github.com/Microsoft/sql-server-samples/blob/master/samples/manage/windows-containers/mssql-server-2016-express-sp1-windows/dockerfile
+MAINTAINER ANANT Corporation info@anant.us
+
+ENV sa_password _
+ENV attach_dbs "[]"
+
+
+
+WORKDIR C:\\temp
+
+# download and install Microsoft SQL 2016 Express Edition in one step
+
+ADD sqlexpress.exe c:\\temp\\sqlexpress.exe 
+RUN sqlexpress.exe /qs /x:setup && /setup/setup.exe /q /ACTION=Install /INSTANCENAME=SQLEXPRESS /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS && del /F /Q sqlexpress.exe && rd /q /s setup
+
+RUN set-strictmode -version latest ; \
+        stop-service MSSQL`$SQLEXPRESS ; \
+        set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\supersocketnetlib\tcp\ipall' -name tcpdynamicports -value '' ; \
+        set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\supersocketnetlib\tcp\ipall' -name tcpport -value 1433 ; \
+        set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\' -name LoginMode -value 2 ; \
+        start-service MSSQL`$SQLEXPRESS ;
+
+#CMD powershell ./start -sa_password %sa_password% -ACCEPT_EULA Y -attach_dbs \"%attach_dbs%\" -Verbose
