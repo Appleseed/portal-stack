@@ -8,7 +8,8 @@ It allows enthusiasts, IT Pros, developers, and designers to quickly bring up Ap
 
 Configure and Install docker-machine, docker, and docker-compose on your machine or server. 
 
-If you are using Windows 2016 Server, the OS now has Docker built-in( but you may have to install compose).
+If you are using Windows 2016 Server, the OS now has Docker built-in (but you may have to install compose).
+- [Get Docker ](https://www.docker.com/products/overview)
 - [Windows Container Docs ](https://aka.ms/WindowsContainers)
 
 ### Windows Docker Portal-Stack Composure
