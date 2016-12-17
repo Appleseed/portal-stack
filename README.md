@@ -10,7 +10,7 @@ Configure and Install docker-machine, docker, and docker-compose on your machine
 
 ### Windows Docker Composure
 - `git clone https://github.com/Appleseed/portal-stack.git`
-- 'cd .\portal-stack\docker\compose\'
+- `cd .\portal-stack\docker\compose\`
 - `docker-compose -f .\docker-compose.windows.yml build`
 - `docker-compose -p portal-stack -f .\docker-compose.windows.yml up -d`
 - `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" portalstack_db-mssql-express-2016_1`
