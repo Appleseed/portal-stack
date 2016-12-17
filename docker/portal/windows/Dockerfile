@@ -22,9 +22,10 @@ ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Por
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
 
 #Set Application Pool to Value 2 : Network Service
-RUN Import-Module WebAdministration ;\
-    Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2 ;\
-    iisreset
+# The below code seems to only work on local.  Doesnt work inside of a container.  Need to investigate.
+#RUN Import-Module WebAdministration ;\
+#    Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2 ;\
+#    iisreset
     
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  ;\
@@ -32,9 +33,9 @@ RUN Remove-WebSite -Name 'Default Web Site'  ;\
     -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
   
 
-#Make Web.config writable only for Network Service
+#Make Web.config writable only for App Pool User
 RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
-    $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule('NETWORK SERVICE','Write','Allow') ;\
+    $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule('IIS_IUSRS','Write','Allow') ;\
     $Acl.SetAccessRule($Ar) ;\
     Set-Acl 'C:\Appleseed\Portal' $Acl
     
