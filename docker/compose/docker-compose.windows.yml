@@ -3,9 +3,9 @@ services:
   db:
     build:
      context: ..\
-     #Testing direct file for now
+     
      dockerfile: \sql\Dockerfile
-    environment:
+     environment:
       sa_password: "Password1"
     ports:
       - "1433:1433" # REMARK: This is currently required, needs investigation
@@ -13,7 +13,7 @@ services:
   web:
     build:
       context: ..\
-      # Testing direct file for now
+     
       dockerfile: portal\windows\Dockerfile
      #environment:
      # - "Data:DefaultConnection:ConnectionString=Server=db,1433;Database=MusicStore;User Id=sa;Password=Password1;MultipleActiveResultSets=True"
