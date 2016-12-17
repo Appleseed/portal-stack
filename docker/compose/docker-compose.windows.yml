@@ -1,25 +1,27 @@
 version: '2.1'
 services:
-  db:
+  db-mssql-express-2016:
     build:
      context: ..\
      dockerfile: \sql\Dockerfile
-     environment:
+    environment:
       sa_password: "Password1"
       ACCEPT_EULA: Y
-      
+
     ports:
       - "1433:1433"
 
-  web:
+  web-appleseed-portal:
     build:
       context: ..\
       dockerfile: portal\windows\Dockerfile
     
-    links:
-     - "db"
     depends_on:
-      - "db"
+      - "db-mssql-express-2016"
+
+    links:
+      - "db-mssql-express-2016"
+
     ports:
       - "80:80"
 
