@@ -8,9 +8,8 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 #Install .NET 4.6.1 / IIS Management Tools
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
     Install-WindowsFeature Web-Asp-Net45 ;\
-    Import-Module ServerManager ;\
-    Install-WindowsFeature Web-Scripting-Tools ;\
-    Import-Module WebAdministration
+    Install-WindowsFeature Web-Scripting-Tools 
+    
 
 #Setup Working Directories
 RUN MD C:\\Appleseed
@@ -28,13 +27,14 @@ RUN New-Website -Name 'Appleseed.Portal' -Port 80 \
     -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
 
 #Set Application Pool to Value 2 : Network Service
-RUN Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2   
+RUN Import-Module WebAdministration \
+    Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2   
 
 #Make Web.config writable only for Network Service
-RUN $Acl = Get-Acl "C:\Appleseed\Portal" 
-RUN $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule("NETWORK SERVICE","Write","Allow") 
-RUN $Acl.SetAccessRule($Ar) 
-RUN Set-Acl "C:\Appleseed\Portal" $Acl
+RUN $Acl = Get-Acl "C:\Appleseed\Portal" \
+    $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule("NETWORK SERVICE","Write","Allow") \
+    $Acl.SetAccessRule($Ar) \
+    Set-Acl "C:\Appleseed\Portal" $Acl
     
 EXPOSE 80
 
