@@ -28,7 +28,7 @@ RUN New-Website -Name 'Appleseed.Portal' -Port 80 \
     -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
 
 #Set Application Pool to Value 2 : Network Service
-RUN Set-ItemProperty "IIS:\AppPools\.NET v4.5" -name processModel.identityType -value 2   
+RUN Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2   
 
 #Make Web.config writable only for Network Service
 RUN $Acl = Get-Acl "C:\Appleseed\Portal" 
