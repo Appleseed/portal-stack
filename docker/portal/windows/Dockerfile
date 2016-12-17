@@ -31,12 +31,10 @@ RUN New-Website -Name 'Appleseed.Portal' -Port 80 \
 RUN Set-ItemProperty "IIS:\AppPools\.NET v4.5" -name processModel.identityType -value 2   
 
 #Make Web.config writable only for Network Service
-
-
 RUN $Acl = Get-Acl "C:\Appleseed\Portal" 
-#$Ar = New-Object  system.security.accesscontrol.filesystemaccessrule("NETWORK SERVICE","Write","Allow") ;\
-#$Acl.SetAccessRule($Ar) ;\
-#Set-Acl "C:\Appleseed\Portal" $Acl
+RUN $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule("NETWORK SERVICE","Write","Allow") 
+RUN $Acl.SetAccessRule($Ar) 
+RUN Set-Acl "C:\Appleseed\Portal" $Acl
     
 EXPOSE 80
 
