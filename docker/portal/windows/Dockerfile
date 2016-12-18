@@ -1,6 +1,7 @@
 # Testing on 1.1.0.0 Release located : https://github.com/Appleseed/portal/releases
  
-FROM microsoft/iis
+#FROM microsoft/iis
+FROM microsoft/nanoserver
 SHELL ["powershell"]
 
 MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/Appleseed/portal-stack/issues
