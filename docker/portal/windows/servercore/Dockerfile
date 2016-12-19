@@ -43,7 +43,7 @@ CMD Write-Host IIS Started... ; \
     
 #Cleanup
 
-RUN rm c:\\Appleseed\\Appleseed.zip
+RUN rm c:\\Appleseed\\Appleseed.Portal.1.2.43.305.zip
 
 
  
