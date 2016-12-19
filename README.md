@@ -1,7 +1,7 @@
 # portal-stack
 This is a Docker containerized stack for the Appleseed Portal Platform : https://github.com/Appleseed/portal/
 
-It allows enthusiasts, IT Pros, developers, and designers to quickly bring up Appleseed Portal enterprised configured containers.  The stack uses Windows 2016 Server, IIS, ASPNet 4.6.1, SQL Server 2016.
+It allows enthusiasts, IT Pros, developers, and designers to quickly bring up Appleseed Portal enterprise configured containers.  The stack uses Windows 2016 Server Core, IIS, ASPNet 4.6.1, SQL Server 2016 Express.
 
 
 ##Quickstart :##
