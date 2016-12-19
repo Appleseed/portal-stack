@@ -14,7 +14,8 @@ RUN MD C:\\solr ;\
 WORKDIR C:\\solr
 
 #Install chocolatey
-RUN iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
+RUN $env:chocolateyUseWindowsCompression = 'false' ;\
+    iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
     choco install jdk8
  
 # ADD Solr 5.5.3
