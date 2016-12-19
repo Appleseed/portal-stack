@@ -13,13 +13,10 @@ RUN MD C:\\solr ;\
     
 WORKDIR C:\\solr
 
-#Download Latest JRE
-add http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jre-8u111-windows-x64.exe C:\\Tempsoft\\jre-8u111-windows-x64.exe
-#Install JRE
-RUN CD C:\\Tempsoft ;\
-    Start-Process -FilePath jre-8u111-windows-x64.exe -ArgumentList "/s" -PassThru -Wait
-# Remove JRE
-RUN rm C:\\Tempsoft\\jre-8u111-windows-x64.exe   
+#Install chocolatey
+RUN iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
+    choco install jdk8
+ 
 # ADD Solr 5.5.3
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\Tempsoft
 #
