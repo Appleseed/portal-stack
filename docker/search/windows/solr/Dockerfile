@@ -16,6 +16,7 @@ WORKDIR C:\\solr
 #Install chocolatey
 RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
+    chocolatey feature enable -n=allowGlobalConfirmation ;\
     choco install jdk8
  
 # ADD Solr 5.5.3
