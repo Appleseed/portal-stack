@@ -1,4 +1,4 @@
-# Testing on 1.1.0.0 Release located : https://github.com/Appleseed/portal/releases
+# Testing on 1.2 Pre-Release Appleseed.Portal Build 12/19/2016
  
 FROM microsoft/windowsservercore
 
@@ -18,10 +18,10 @@ RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
-ADD https://github.com/Appleseed/portal/releases/download/v1.1.0.0/Appleseed.Portal.1.1.0.0.zip c:\\Appleseed
+ADD https://ci.appveyor.com/api/buildjobs/e3yd5e0jjyqphr2g/artifacts/Appleseed.zip c:\\Appleseed
 
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
     
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  ;\
@@ -43,7 +43,7 @@ CMD Write-Host IIS Started... ; \
     
 #Cleanup
 
-RUN rm c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip
+RUN rm c:\\Appleseed\\Appleseed.zip
 
 
  
