@@ -23,4 +23,4 @@ RUN set-strictmode -version latest ; \
         set-itemproperty -path 'HKLM:\software\microsoft\microsoft sql server\mssql13.SQLEXPRESS\mssqlserver\' -name LoginMode -value 2 ; \
         start-service MSSQL`$SQLEXPRESS ;
 
-#CMD powershell ./start -sa_password %sa_password% -ACCEPT_EULA Y -attach_dbs \"%attach_dbs%\" -Verbose
+CMD powershell ./start -sa_password %sa_password% -ACCEPT_EULA Y -attach_dbs \"%attach_dbs%\" -Verbose
