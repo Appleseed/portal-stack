@@ -22,7 +22,7 @@ If you are using Windows 2016 Server, the OS now has Docker built-in (but you ma
 - `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" portalstack_web-appleseed-portal_1`
 
 ### Appleseed.Portal Docker Build
-- `docker build https://raw.githubusercontent.com/Appleseed/portal-stack/master/docker/portal/windows/Dockerfile -t portal`
+- `docker build https://raw.githubusercontent.com/Appleseed/portal-stack/master/docker/portal/windows/servercore/Dockerfile -t portal`
 - `docker run -d -p 80:80 --name appleseed portal`
 - `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" appleseed`
 
