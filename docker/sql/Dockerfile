@@ -1,4 +1,4 @@
 # mssql server 2016 SP1 express image
-FROM microsoft/mssql-server-windows-express
+FROM microsoft/windowsservercore
 
 MAINTAINER ANANT Corporation info@anant.us
