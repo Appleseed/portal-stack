@@ -24,8 +24,8 @@ services:
 
     ports:
       - "80:80"
-
-networks:
-  default:
-    external:
-      name: nat
+#Only use the below section if you want to live host on the external internet
+#networks:
+ # default:
+  #  external:
+   #   name: nat
