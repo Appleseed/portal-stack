@@ -18,7 +18,7 @@ RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
-ADD https://ci.appveyor.com/api/buildjobs/e3yd5e0jjyqphr2g/artifacts/Appleseed.zip c:\\Appleseed
+ADD https://github.com/Appleseed/portal/releases/download/1.2.43.305/Appleseed.Portal.1.2.43.305.zip c:\\Appleseed
 
 #Unzip the main archive
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
