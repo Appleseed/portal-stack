@@ -3,7 +3,7 @@ services:
   db-mssql-express-2016:
     build:
      context: ..\
-     dockerfile: \sql\
+     dockerfile: \sql\Dockerfile
     environment:
       sa_password: "Password1"
       ACCEPT_EULA: Y
@@ -14,7 +14,7 @@ services:
   web-appleseed-portal:
     build:
       context: ..\
-      dockerfile: portal\windows\servercore\
+      dockerfile: portal\windows\servercore\Dockerfile
     
     depends_on:
       - "db-mssql-express-2016"
