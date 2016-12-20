@@ -57,7 +57,7 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Temps
    
     
 #Add Solr As a Service
-Run $params = @('install', 'Solr5', 'c:\\solr\\solr-5.5.3\\bin\\solr.cmd',
+Run $params = @('install', 'Solr5', 'c:\\solr\\solr-5.5.3\\bin\\solr.cmd', \
            'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s c:\\solr\\solr-5.5.3\\example\\appleseed-search\\solr -V') ;\
     nssm $params
     
