@@ -9,7 +9,7 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 #Setup Working Directories
 RUN MD C:\\solr ;\
     MD C:\\Tempsoft ;\
-    MD C:\\elastic
+   
     
 WORKDIR C:\\solr
 
