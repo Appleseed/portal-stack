@@ -31,7 +31,7 @@ RUN rm  C:\\Tempsoft\\solr-5.5.3.zip
 
 #Add Core
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/appleseed-search.core.zip C:\\Tempsoft
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'C:\\Tempsoft'"
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'C:\\Tempsoft\\appleseed-search'"
 
 
 COPY C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
