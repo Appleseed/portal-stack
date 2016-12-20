@@ -8,21 +8,43 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 
 #Setup Working Directories
 RUN MD C:\\solr ;\
-    MD C:\\Tempsoft 
+    MD C:\\Tempsoft ;\
+    MD C:\\Appleseed\\Proxy
        
 WORKDIR C:\\solr
 
-#Install chocolatey
+#Install .NET 4.6.1 / IIS Management Tools
+RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
+    Install-WindowsFeature Web-Asp-Net45 ;\
+    Install-WindowsFeature Web-Scripting-Tools ;\
+    Install-WindowsFeature Web-Static-Content
+    
+
+#Install chocolatey and any required tools
 RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
     chocolatey feature enable -n=allowGlobalConfirmation ;\
     choco install jdk8 ;\
-    choco install 7zip.install
+    choco install 7zip.install ;\
+    choco install urlrewrite ;\
+    choco install nssm
+  
+#Pull down Proxy
+ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/proxy.config.zip C:\\Appleseed\\Proxy    
+    
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Appleseed\\Proxy\\proxy.config.zip' -DestinationPath ' C:\\Appleseed\\Proxy'" ;\
+    rm C:\\Appleseed\\Proxy\\proxy.config.zip
+
+#Create an IIS Proxy
+RUN Remove-WebSite -Name 'Default Web Site'  ;\
+    New-Website -Name 'Appleseed.Search.Proxy' -Port 80 \  
+    -PhysicalPath 'c:\Appleseed\Proxy' -ApplicationPool '.NET v4.5'
+    
  
 # ADD Solr 5.5.3
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip  C:\\Tempsoft
 #Unzip the main archive
-#RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
+#Solr is so large it needs 7zip to unzip and not error
 RUN cd $env:programfiles\\7-Zip\\ ;\
    ./7z x  C:\\Tempsoft\\solr-5.5.3.zip -oc:\\solr
 
@@ -31,16 +53,8 @@ RUN rm  C:\\Tempsoft\\solr-5.5.3.zip
 
 #Add Core
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/appleseed-search.core.zip C:\\Tempsoft
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'C:\\Tempsoft'" ;\
-    cd C:\\Tempsoft ;\
-    dir ;\
-    cd C:\\Tempsoft\\appleseed-search ;\
-    dir ;\
-    cd c:\\solr ;\
-    dir ;\
-    cd c:\\solr\\solr-5.5.3
-
-    
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'C:\\Tempsoft'" 
+#add core example
 RUN CP C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
 #Start Solr
 RUN 'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s example\\appleseed-search\\solr -V'
