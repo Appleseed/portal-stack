@@ -20,17 +20,22 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     choco install jdk8
  
 # ADD Solr 5.5.3
-ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\Tempsoft
+ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\solr
 #
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
- 
+#RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
+RUN cd C:\\solr ;\
+    7z e solr-5.5.3.zip
+
+
 #Cleanup
-RUN rm C:\\Tempsoft\\solr-5.5.3.zip  
+RUN rm C:\\solr\\solr-5.5.3.zip  
 
 #Add Core
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/appleseed-search.core.zip C:\\Tempsoft
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'C:\\Tempsoft'"
+
+
 COPY C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
 #Start Solr
 RUN c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s example\\appleseed-search\\solr -V
