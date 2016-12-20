@@ -1,0 +1,53 @@
+# Windows Portal Stack Load Balance Set using https://traefik.io/
+version: '2.1'
+services:
+  db-mssql-express-2016:
+    build:
+     context: ..\
+     dockerfile: \sql\Dockerfile
+    environment:
+      sa_password: "Password1"
+      ACCEPT_EULA: Y
+
+    ports:
+      - "1433:1433"
+
+  web-appleseed-portal1:
+    build:
+      context: ..\
+      dockerfile: portal\windows\servercore\Dockerfile
+    
+    depends_on:
+      - "db-mssql-express-2016"
+
+    links:
+      - "db-mssql-express-2016"
+
+    ports:
+      - "80:80"
+      
+  web-appleseed-portal2:
+    build:
+      context: ..\
+      dockerfile: portal\windows\servercore\Dockerfile
+    
+    depends_on:
+      - "db-mssql-express-2016"
+
+    links:
+      - "db-mssql-express-2016"
+
+    ports:
+      - "80:80"
+      
+  lb:
+    image: traefik:win
+    links:
+     - web-appleseed-portal1
+     - web-appleseed-portal2
+
+#Only use the below section if you want to live host on the external internet
+#networks:
+ # default:
+  #  external:
+   #   name: nat
