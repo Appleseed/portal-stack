@@ -23,8 +23,8 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\solr
 #Unzip the main archive
 #RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
-RUN cd C:\\solr ;\
-   $env:programfiles\\7-Zip\\7z e solr-5.5.3.zip
+RUN cd $env:programfiles\\7-Zip\\ ;\
+   ./7z x solr-5.5.3.zip c:\\solr
 
 #Cleanup
 RUN rm C:\\solr\\solr-5.5.3.zip  
