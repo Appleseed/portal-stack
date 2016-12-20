@@ -28,10 +28,11 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Temps
 RUN rm C:\\Tempsoft\\elasticsearch-5.1.1.zip  
 
 #Start Elastic
-RUN c:\\elastic\\elasticsearch-5.1.1\\bin\\elasticsearch.bat
+#RUN c:\\elastic\\elasticsearch-5.1.1\\bin\\elasticsearch.bat
 
 EXPOSE 9200
 
+ENTRYPOINT ["c:\\elastic\\elasticsearch-5.1.1\\bin\\elasticsearch.bat"]
  
 
 
