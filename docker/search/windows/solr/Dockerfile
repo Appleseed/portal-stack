@@ -38,7 +38,7 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Temps
     dir ;\
     cd c:\\solr ;\
     dir ;\
-    cd :\\solr\\solr-5.5.3
+    cd c:\\solr\\solr-5.5.3
 
     
 COPY C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
