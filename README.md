@@ -27,10 +27,13 @@ If you are using Windows 2016 Server, the OS now has Docker built-in (but you ma
 - `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" appleseed`
 
 ### Appleseed.Search Docker Build
-- TODO: Add Appleseed.Search Integration with Appleseed.Portal
+- TODO: Test Appleseed.Portal to Appleseed.Search Container Integration
+- TODO: Test SOLR Connectivity
+- TODO: Test Elastic Connectivity
 
 ### Database Docker Build
 - TODO: SQL Server - Attach working fresh database file
+- TODO: SQL Server - Use Chocolatey for Manual 2016 Express install https://chocolatey.org/packages/sql-server-express/13.0.1601.5
 - TODO: AzureDB - Add Scripts to create empty AzureDB
 
 
