@@ -57,7 +57,7 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Temps
 #add core example
 RUN CP C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
 #Start Solr
-RUN 'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s example\\appleseed-search\\solr -V'
+RUN 'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s c:\\solr\\solr-5.5.3\\example\\appleseed-search\\solr -V'
 
 #ENTRYPOINT ["C:\\solr\\solr-5.5.3\\bin\\solr.cmd" ]
 
