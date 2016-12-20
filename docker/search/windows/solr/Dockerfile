@@ -24,7 +24,7 @@ ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\solr
 #Unzip the main archive
 #RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
 RUN cd C:\\solr ;\
-   C:\\Program Files\\7-Zip\\7z e solr-5.5.3.zip
+   "$env:programfiles"\\7-Zip\\7z e solr-5.5.3.zip
 
 #Cleanup
 RUN rm C:\\solr\\solr-5.5.3.zip  
