@@ -30,9 +30,9 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     choco install nssm
   
 #Pull down Proxy
-ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/proxy.config.zip C:\\Appleseed\\Proxy    
+ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/solr.proxy.config.zip C:\\Appleseed\\Proxy    
     
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Appleseed\\Proxy\\proxy.config.zip' -DestinationPath ' C:\\Appleseed\\Proxy'" ;\
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Appleseed\\Proxy\\solr.proxy.config.zip' -DestinationPath ' C:\\Appleseed\\Proxy'" ;\
     rm C:\\Appleseed\\Proxy\\proxy.config.zip
 
 #Create an IIS Proxy
@@ -59,7 +59,9 @@ RUN CP C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
 #Start Solr
 #RUN 'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s example\\appleseed-search\\solr -V'
 
-ENTRYPOINT ["C:\\solr\\solr-5.5.3\\bin\\solr.cmd" "start -f -p 8983 -s example\\appleseed-search\\solr -V"]
+ENTRYPOINT ["C:\\solr\\solr-5.5.3\\bin\\solr.cmd" ]
+
+CMD ["start -f -p 8983 -s example\\appleseed-search\\solr -V"]
 #nssm install 'solr5' 'C:\\solr\\solr-5.5.3\\bin\\solr.cmd' 'start -f -p 8983 -s example\\appleseed-search\\solr -V'
 EXPOSE 8983
 
