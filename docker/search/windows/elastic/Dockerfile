@@ -8,15 +8,36 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 
 #Setup Working Directories
 RUN MD C:\\Tempsoft ;\
-    MD C:\\elastic
+    MD C:\\elastic ;\
+    MD C:\\Appleseed\\Proxy
     
 WORKDIR C:\\elastic
+
+#Install .NET 4.6.1 / IIS Management Tools
+RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
+    Install-WindowsFeature Web-Asp-Net45 ;\
+    Install-WindowsFeature Web-Scripting-Tools ;\
+    Install-WindowsFeature Web-Static-Content
 
 #Install chocolatey
 RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
     chocolatey feature enable -n=allowGlobalConfirmation ;\
-    choco install jdk8
+    choco install jdk8 ;\
+    choco install 7zip.install ;\
+    choco install urlrewrite ;\
+    choco install nssm
+    
+#Pull down Proxy
+ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/proxy.config.zip C:\\Appleseed\\Proxy    
+    
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Appleseed\\Proxy\\elastic.proxy.config.zip' -DestinationPath ' C:\\Appleseed\\Proxy'" ;\
+    rm C:\\Appleseed\\Proxy\\elastic.proxy.config.zip
+
+#Create an IIS Proxy
+RUN Remove-WebSite -Name 'Default Web Site'  ;\
+    New-Website -Name 'Appleseed.Search.Proxy' -Port 80 \  
+    -PhysicalPath 'c:\Appleseed\Proxy' -ApplicationPool '.NET v4.5'
  
 # ADD Elastic 5.1.1
 ADD https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.zip C:\\Tempsoft
