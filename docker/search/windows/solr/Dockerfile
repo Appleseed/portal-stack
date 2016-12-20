@@ -53,13 +53,18 @@ RUN rm  C:\\Tempsoft\\solr-5.5.3.zip
 #Add Core | Start Solr
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/appleseed-search.core.zip C:\\Tempsoft
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'c:\\solr\\solr-5.5.3\\example'" ;\
-    rm C:\\Tempsoft\\appleseed-search.core.zip ;\
-    cd c:\\solr\\solr-5.5.3\\bin ;\
-    .\solr start -f -p 8983 -s c:\\solr\\solr-5.5.3\\example\\appleseed-search\\solr -V
+    rm C:\\Tempsoft\\appleseed-search.core.zip 
+   
+    
+#Add Solr As a Service
+Run $params = @('install', 'Solr5', 'c:\\solr\\solr-5.5.3\\bin\\solr.cmd',
+           'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s c:\\solr\\solr-5.5.3\\example\\appleseed-search\\solr -V') ;\
+    nssm $params
+    
+Run Start-Service Solr5
 
 EXPOSE 8983
 
  
-
 
  
