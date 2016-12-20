@@ -40,8 +40,7 @@ RUN Remove-WebSite -Name 'Default Web Site'  ;\
     New-Website -Name 'Appleseed.Search.Proxy' -Port 80 \  
     -PhysicalPath 'c:\Appleseed\Proxy' -ApplicationPool '.NET v4.5'
     
- 
-# ADD Solr 5.5.3
+ # ADD Solr 5.5.3
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip  C:\\Tempsoft
 #Unzip the main archive
 #Solr is so large it needs 7zip to unzip and not error
@@ -51,21 +50,12 @@ RUN cd $env:programfiles\\7-Zip\\ ;\
 #Cleanup
 RUN rm  C:\\Tempsoft\\solr-5.5.3.zip  
 
-#Add Core
+#Add Core | Start Solr
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/appleseed-search.core.zip C:\\Tempsoft
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'c:\\solr\\solr-5.5.3\\example'" 
-#add core example
-#RUN CP C:\\Tempsoft\\appleseed-search c:\\solr\\solr-5.5.3\\example
-#Start Solr
-RUN cd c:\\solr\\solr-5.5.3\\example\\appleseed-search ;\
-    dir ;\
-    cd c:\\solr\\solr-5.5.3\\bin ;\
-   .\solr start -f -p 8983 -s c:\\solr\\solr-5.5.3\\example\\appleseed-search\\solr -V
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\appleseed-search.core.zip' -DestinationPath 'c:\\solr\\solr-5.5.3\\example'" ;\
+    rm C:\\Tempsoft\\appleseed-search.core.zip ;\
+    .\solr start -f -p 8983 -s c:\\solr\\solr-5.5.3\\example\\appleseed-search\\solr -V
 
-#ENTRYPOINT ["C:\\solr\\solr-5.5.3\\bin\\solr.cmd" ]
-
-#CMD ["start -f -p 8983 -s example\\appleseed-search\\solr -V"]
-#nssm install 'solr5' 'C:\\solr\\solr-5.5.3\\bin\\solr.cmd' 'start -f -p 8983 -s example\\appleseed-search\\solr -V'
 EXPOSE 8983
 
  
