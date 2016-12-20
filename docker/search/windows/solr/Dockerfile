@@ -33,7 +33,7 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/solr.proxy.config.zip C:\\Appleseed\\Proxy    
     
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Appleseed\\Proxy\\solr.proxy.config.zip' -DestinationPath ' C:\\Appleseed\\Proxy'" ;\
-    rm C:\\Appleseed\\Proxy\\proxy.config.zip
+    rm C:\\Appleseed\\Proxy\\solr.proxy.config.zip
 
 #Create an IIS Proxy
 RUN Remove-WebSite -Name 'Default Web Site'  ;\
