@@ -8,9 +8,8 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 
 #Setup Working Directories
 RUN MD C:\\solr ;\
-    MD C:\\Tempsoft ;\
-   
-    
+    MD C:\\Tempsoft 
+       
 WORKDIR C:\\solr
 
 #Install chocolatey
@@ -21,12 +20,10 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
  
 # ADD Solr 5.5.3
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\solr
-#
 #Unzip the main archive
 #RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
 RUN cd C:\\solr ;\
     C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\chocolatey\\chocInstall\\7za.exe e solr-5.5.3.zip
-
 
 #Cleanup
 RUN rm C:\\solr\\solr-5.5.3.zip  
