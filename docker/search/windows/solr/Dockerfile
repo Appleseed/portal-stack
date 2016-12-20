@@ -20,14 +20,14 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     choco install 7zip.install
  
 # ADD Solr 5.5.3
-ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\solr
+ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip  C:\\Tempsoft
 #Unzip the main archive
 #RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
 RUN cd $env:programfiles\\7-Zip\\ ;\
-   ./7z x c:\\solr\\solr-5.5.3.zip -oc:\\solr
+   ./7z x  C:\\Tempsoft\\solr-5.5.3.zip -oc:\\solr
 
 #Cleanup
-RUN rm C:\\solr\\solr-5.5.3.zip  
+RUN rm  C:\\Tempsoft\\solr-5.5.3.zip  
 
 #Add Core
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/appleseed-search.core.zip C:\\Tempsoft
