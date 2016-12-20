@@ -41,6 +41,8 @@ RUN CD  C:\\Tempsoft ;\
         DIR ;\
         cd c:\\solr\\solr-5.5.3\\example ;\
         dir ;\
+        
+        
 #COPY C:\\Tempsoft\\appleseed-search\\solr c:\\solr\\solr-5.5.3\\example\\solr
 #Start Solr
 RUN 'c:\\solr\\solr-5.5.3\\bin\\solr start -f -p 8983 -s example\\appleseed-search\\solr -V'
