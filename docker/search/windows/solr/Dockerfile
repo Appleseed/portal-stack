@@ -16,14 +16,15 @@ WORKDIR C:\\solr
 RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')) ;\
     chocolatey feature enable -n=allowGlobalConfirmation ;\
-    choco install jdk8
+    choco install jdk8 ;\
+    choco install 7zip.install
  
 # ADD Solr 5.5.3
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip C:\\solr
 #Unzip the main archive
 #RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Tempsoft\\solr-5.5.3.zip' -DestinationPath 'C:\\solr'"
 RUN cd C:\\solr ;\
-    C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\chocolatey\\chocInstall\\7za.exe e solr-5.5.3.zip
+   7za e solr-5.5.3.zip
 
 #Cleanup
 RUN rm C:\\solr\\solr-5.5.3.zip  
