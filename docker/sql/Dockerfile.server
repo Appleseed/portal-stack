@@ -1,0 +1,4 @@
+# MSSQL Server 2016 Official Edition (Load Balance)
+# Should be used in enterprise deployments or scale
+FROM microsoft/mssql-server-windows
+MAINTAINER ANANT Corporation info@anant.us
