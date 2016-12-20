@@ -53,8 +53,8 @@ RUN rm C:\\Tempsoft\\elasticsearch-5.1.1.zip
 
 EXPOSE 9200
 
-ENTRYPOINT ["c:\\elastic\\elasticsearch-5.1.1\\bin\\elasticsearch.bat"]
- 
+#ENTRYPOINT ["c:\\elastic\\elasticsearch-5.1.1\\bin\\elasticsearch.bat"]
+RUN c:\\elastic\\elasticsearch-5.1.1\\bin\\elasticsearch.bat
 
 
  
