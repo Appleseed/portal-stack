@@ -1,6 +1,6 @@
 # Solr 5.5.3 on Windows Server Core 2016 ( UI Less)
  
-#FROM microsoft/windowsservercore
+
 From microsoft/iis
 
 SHELL ["powershell"]
