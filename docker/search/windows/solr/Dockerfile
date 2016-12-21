@@ -64,7 +64,7 @@ RUN $params = @('install', 'Solr5', 'c:\\solr\\solr-5.5.3\\bin\\solr.cmd', \
     
 RUN Start-Service Solr5
 
-EXPOSE 8983
+EXPOSE 80
 
  
 
