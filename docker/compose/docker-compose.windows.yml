@@ -14,7 +14,7 @@ services:
   web-appleseed-portal:
     build:
       context: ..\
-      dockerfile: portal\windows\servercore\Dockerfile
+      dockerfile: portal\windows\Dockerfile
     
     depends_on:
       - "db-mssql-express-2016"
