@@ -1,6 +1,6 @@
 # Elastic 5.1.1 on Windows Server Core 2016 ( UI Less)
  
-FROM microsoft/windowsservercore
+FROM microsoft/iis
 
 SHELL ["powershell"]
 
