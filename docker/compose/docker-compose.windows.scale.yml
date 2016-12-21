@@ -4,7 +4,7 @@ services:
   db-mssql-2016:
     build:
      context: ..\
-     dockerfile: \sql\Dockerfile.server
+     dockerfile: \db\sql\Dockerfile.server
     environment:
       sa_password: "Password1"
       ACCEPT_EULA: Y
