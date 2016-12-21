@@ -3,7 +3,7 @@ services:
   db-mssql-express-2016:
     build:
      context: ..\
-     dockerfile: \db\sql\Dockerfile
+     dockerfile: \db\mssql\Dockerfile
     environment:
       sa_password: "Password1"
       ACCEPT_EULA: Y
