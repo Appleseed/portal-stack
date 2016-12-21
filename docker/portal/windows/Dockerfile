@@ -1,4 +1,4 @@
-# Testing on 1.1.0.0 Release located : https://github.com/Appleseed/portal/releases
+# Uses Appleseed.Portal Build 1.2.43.305 | 12/19/2016
  
 FROM microsoft/iis
 
@@ -21,13 +21,7 @@ WORKDIR C:\\Appleseed
 ADD https://github.com/Appleseed/portal/releases/download/1.2.43.305/Appleseed.Portal.1.2.43.305.zip c:\\Appleseed
 
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.1.0.0.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
-
-#Set Application Pool to Value 2 : Network Service
-# The below code seems to only work on local.  Doesnt work inside of a container.  Need to investigate.
-#RUN Import-Module WebAdministration ;\
-#    Set-ItemProperty 'IIS:\AppPools\.NET v4.5' -name processModel.identityType -value 2 ;\
-#    iisreset
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
     
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  ;\
