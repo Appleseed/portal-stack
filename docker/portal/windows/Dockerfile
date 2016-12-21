@@ -10,7 +10,8 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
     Install-WindowsFeature Web-Asp-Net45 ;\
     Install-WindowsFeature Web-Scripting-Tools ;\
-    Install-WindowsFeature Web-Static-Content
+    #Web Static Content is not needed as long as microsoft/iis image is used.
+    #Install-WindowsFeature Web-Static-Content
     
 
 #Setup Working Directories
@@ -21,7 +22,7 @@ WORKDIR C:\\Appleseed
 ADD https://github.com/Appleseed/portal/releases/download/1.2.43.305/Appleseed.Portal.1.2.43.305.zip c:\\Appleseed
 
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.2.43.305.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
     
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  ;\
