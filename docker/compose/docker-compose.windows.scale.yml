@@ -15,7 +15,7 @@ services:
   web-appleseed-portal1:
     build:
       context: ..\
-      dockerfile: portal\windows\servercore\Dockerfile
+      dockerfile: portal\windows\Dockerfile
     
     depends_on:
       - "db-mssql-2016"
@@ -29,7 +29,7 @@ services:
   web-appleseed-portal2:
     build:
       context: ..\
-      dockerfile: portal\windows\servercore\Dockerfile
+      dockerfile: portal\windows\Dockerfile
     
     depends_on:
       - "db-mssql-2016"
