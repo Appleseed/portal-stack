@@ -28,7 +28,8 @@ RUN $env:chocolateyUseWindowsCompression = 'false' ;\
     choco install jdk8 ;\
     choco install 7zip.install ;\
     choco install urlrewrite ;\
-    choco install nssm
+    choco install nssm ;\
+    choco install iis-arr
   
 #Pull down Proxy
 ADD https://github.com/Appleseed/portal-stack/releases/download/v1.1.1.0/solr.proxy.config.zip C:\\Appleseed\\Proxy    
@@ -39,7 +40,9 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'C:\\Apple
 #Create an IIS Proxy
 RUN Remove-WebSite -Name 'Default Web Site'  ;\
     New-Website -Name 'Appleseed.Search.Proxy' -Port 80 \  
-    -PhysicalPath 'c:\Appleseed\Proxy' -ApplicationPool '.NET v4.5'
+    -PhysicalPath 'c:\Appleseed\Proxy' -ApplicationPool '.NET v4.5' ;\
+    Set-WebConfigurationProperty -filter /system.WebServer/security/authentication/AnonymousAuthentication \
+            -name enabled -value true -location Appleseed.Search.Proxy
     
  # ADD Solr 5.5.3
 ADD http://apache.mirrors.ionfish.org/lucene/solr/5.5.3/solr-5.5.3.zip  C:\\Tempsoft
