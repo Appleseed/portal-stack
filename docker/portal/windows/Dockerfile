@@ -7,7 +7,7 @@ SHELL ["powershell"]
 MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/Appleseed/portal-stack/issues
 
 #Install .NET 4.6.1 / IIS Management Tools
-RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
+RUN Install-WindowsFeature NET-Framework-45-ASPNET ;\  
     Install-WindowsFeature Web-Asp-Net45 ;\
     Install-WindowsFeature Web-Scripting-Tools 
     #Web Static Content is not needed as long as microsoft/iis image is used.
