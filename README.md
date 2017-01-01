@@ -6,7 +6,7 @@ It allows enthusiasts, IT Pros, developers, and designers to quickly bring up Ap
 
 ##Quickstart :##
 
-Configure and Install docker-machine, docker, and docker-compose on your machine or server. 
+Configure and Install docker-machine, docker, and docker-compose on your machine or server.  Please note that by default this stack installs to port 80 of your site.  This may be configured in either the compose file or docker run command to bring up internally.  If brought up internally, firewall settings will have to be adjusted to the internal port assigned.
 
 If you are using Windows 2016 Server, the OS now has Docker built-in (but you may have to install compose).
 - [Get Docker ](https://www.docker.com/products/overview)
@@ -22,8 +22,7 @@ If you are using Windows 2016 Server, the OS now has Docker built-in (but you ma
 
 ### Appleseed.Portal Docker Build
 - `docker build https://raw.githubusercontent.com/Appleseed/portal-stack/master/docker/portal/windows/servercore/Dockerfile -t portal`
--  External Port 80 :`docker run -d -p 80:80 --name appleseed portal`
--  Internal Dynamic Port :`docker run -d -p 80 --name appleseed portal`
+- `docker run -d -p 80:80 --name appleseed portal`
 - `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" appleseed`
 
 ### Database Docker Build
