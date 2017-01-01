@@ -7,7 +7,7 @@ services:
     environment:
       sa_password: "Password1"
       ACCEPT_EULA: Y
-
+    #Port 1433 is usually blocked externally on windows host.  If it is not, use a dynamic / blocked internal port
     ports:
       - "1433:1433"
 
@@ -21,7 +21,11 @@ services:
 
     links:
       - "db-mssql-express-2016"
-
+    #Port 80 is exposed on the container but will be given a radom blocked host port ( so only the host can use at first)  
     ports:
       - "80"
 
+networks:
+    default:
+       external:
+           name: nat
