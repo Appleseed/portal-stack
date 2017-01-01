@@ -21,9 +21,9 @@ services:
 
     links:
       - "db-mssql-express-2016"
-    #Port 80 is exposed on the container but will be given a radom blocked host port ( so only the host can use at first)  
+    #Port 80 is exposed on the container and host.  Admins can modify this in their own version. 
     ports:
-      - "80"
+      - "80:80"
 
 networks:
     default:
