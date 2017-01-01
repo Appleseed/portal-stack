@@ -9,6 +9,7 @@ services:
       sa_password: "Password1"
       ACCEPT_EULA: Y
 
+    #Use 1433:1433 as long as port 1433 is blocked externally on the HOST
     ports:
       - "1433:1433"
 
@@ -22,9 +23,9 @@ services:
 
     links:
       - "db-mssql-2016"
-
+    #Port 80 is exposed on the container but will be given a radom blocked host port ( so only the host can use at first)  
     ports:
-      - "80:80"
+      - "80"
       
   web-appleseed-portal2:
     build:
@@ -38,7 +39,7 @@ services:
       - "db-mssql-2016"
 
     ports:
-      - "80:80"
+      - "80"
       
   lb:
     image: traefik:win
@@ -46,8 +47,8 @@ services:
      - web-appleseed-portal1
      - web-appleseed-portal2
 
-#Only use the below section if you want to live host on the external internet
-#networks:
- # default:
-  #  external:
-   #   name: nat
+
+networks:
+    default:
+       external:
+           name: nat
