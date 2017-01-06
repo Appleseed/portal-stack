@@ -24,8 +24,7 @@ services:
     links:
       - "db-mssql-2016"
     #Port 80 is exposed on the container but will be given a radom blocked host port ( so only the host can use at first)  
-    ports:
-      - "80"
+    
       
   web-appleseed-portal2:
     build:
@@ -38,11 +37,12 @@ services:
     links:
       - "db-mssql-2016"
 
-    ports:
-      - "80"
+    
       
-  lb:
-    image: traefik:win
+  web-load-balance-proxy:
+    build:
+       context: ..\
+        dockerfile: traefik\windows\Dockerfile
     links:
      - web-appleseed-portal1
      - web-appleseed-portal2
