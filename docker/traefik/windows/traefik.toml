@@ -1,0 +1,21 @@
+[web]
+address = ":8080"
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+[file]
+[backends]
+  [backends.appleseed.portal]
+    [backends.appleseed.portal.servers.server1]
+    url = "http://web1:80"
+    weight = 1
+    [backends.appleseed.portal.servers.server2]
+    url = "http://web2:80"
+    weight = 1
+
+[frontends]
+  [frontends.www]
+  backend = "appleseed.portal"
+  entrypoints = ["http"]
