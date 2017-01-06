@@ -42,7 +42,7 @@ services:
   web-load-balance-proxy:
     build:
        context: ..\
-        dockerfile: traefik\windows\Dockerfile
+       dockerfile: traefik\windows\Dockerfile
     links:
      - web-appleseed-portal1
      - web-appleseed-portal2
