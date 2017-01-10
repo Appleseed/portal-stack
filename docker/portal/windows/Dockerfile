@@ -9,11 +9,9 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 #Install .NET 4.6.1 / IIS Management Tools
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ;\
     Install-WindowsFeature Web-Asp-Net45 ;\
-    Install-WindowsFeature Web-Scripting-Tools 
-    #Web Static Content is not needed as long as microsoft/iis image is used.
-    #Install-WindowsFeature Web-Static-Content
+    Install-WindowsFeature Web-Scripting-Tools ;\
+    Install-WindowsFeature Smtp-Server
     
-
 #Setup Working Directories
 RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
@@ -37,13 +35,15 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
     
 EXPOSE 80
 
+#Cleanup
+
+RUN rm c:\\Appleseed\\Appleseed.Portal.1.2.43.305.zip
+
 #Make sure IIS comes up
 CMD Write-Host IIS Started... ;\
     while ($true) { Start-Sleep -Seconds 3600 }
     
-#Cleanup
 
-RUN rm c:\\Appleseed\\Appleseed.Portal.1.2.43.305.zip
 
 
  
