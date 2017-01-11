@@ -10,7 +10,7 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ;\
     Install-WindowsFeature Web-Asp-Net45 ;\
     Install-WindowsFeature Web-Scripting-Tools ;\
-    Add-WindowsFeature SMTP-Server
+    Install-WindowsFeature SMTP-Server
     
 #Setup Working Directories
 RUN MD C:\\Appleseed
@@ -33,15 +33,16 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
     $Acl.SetAccessRule($Ar) ;\
     Set-Acl 'C:\Appleseed\Portal\Web.config' $Acl
     
-EXPOSE 80
-
 #Cleanup
-
 RUN rm c:\\Appleseed\\Appleseed.Portal.1.2.43.305.zip
+
+EXPOSE 80
 
 #Make sure IIS comes up
 CMD Write-Host IIS Started... ;\
     while ($true) { Start-Sleep -Seconds 3600 }
+    
+    
     
 
 
