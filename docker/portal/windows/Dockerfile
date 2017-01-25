@@ -22,7 +22,10 @@ ADD https://ci.appveyor.com/api/buildjobs/bs80tlp5bqt8d6k1/artifacts/Appleseed.z
 
 #Unzip the main archive
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
-    
+   
+#Cleanup
+RUN rm c:\\Appleseed\\Appleseed.zip
+
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  
 RUN  New-Website   -Name 'Appleseed.Portal' -Port 80 -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
@@ -34,8 +37,6 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
     $Acl.SetAccessRule($Ar) ;\
     Set-Acl 'C:\Appleseed\Portal\Web.config' $Acl
     
-#Cleanup
-RUN rm c:\\Appleseed\\Appleseed.zip
 
 EXPOSE 80
 
