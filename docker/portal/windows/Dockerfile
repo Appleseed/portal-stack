@@ -1,4 +1,4 @@
-# Uses Appleseed.Portal Build 1.2.43.305 | 12/19/2016
+# Uses Appleseed.Portal Build v1.3.69.342 | 2/5/2017
  
 FROM microsoft/iis
 
@@ -18,13 +18,13 @@ RUN MD C:\\Appleseed
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
-ADD https://ci.appveyor.com/api/buildjobs/x0fjnje9rqrpe9ig/artifacts/Appleseed.zip c:\\Appleseed
+ADD https://github.com/Appleseed/portal/releases/download/v1.3.69.342/Appleseed.Portal.1.3.69.342.zip c:\\Appleseed
 
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.3.69.342.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
    
 #Cleanup
-RUN rm c:\\Appleseed\\Appleseed.zip
+RUN rm c:\\Appleseed\\Appleseed.Portal.1.3.69.342.zip
 
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  
