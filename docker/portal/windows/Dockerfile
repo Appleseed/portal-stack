@@ -46,7 +46,8 @@ EXPOSE 80
 # ADD STMP Client
 ADD https://downloads.sourceforge.net/project/blat/Blat%20Full%20Version/64%20bit%20versions/blat3217_64.full.zip?r=&ts=1487698431&use_mirror=superb-dca2 c:\\Services
 
-
+#Unzip the Client
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Services\\blat3217_64.full.zip' -DestinationPath 'c:\\Services\\Mail'"
 
 #Cleanup
 RUN rm c:\\Services\\blat3217_64.full.zip
