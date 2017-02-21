@@ -14,7 +14,9 @@ RUN Install-WindowsFeature NET-Framework-45-ASPNET ;\
    # Install-WindowsFeature SMTP-Server
     
 #Setup Working Directories
-RUN MD C:\\Appleseed
+RUN MD C:\\Appleseed ;\
+    MD C:\\Services
+    
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
@@ -36,7 +38,6 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
     $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule('IIS_IUSRS','Write','Allow') ;\
     $Acl.SetAccessRule($Ar) ;\
     Set-Acl 'C:\Appleseed\Portal\Web.config' $Acl
-    
 
 EXPOSE 80
 
