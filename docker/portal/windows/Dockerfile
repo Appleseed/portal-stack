@@ -52,6 +52,12 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Servi
 #Cleanup
 RUN rm c:\\Services\\blat3217_64.full.zip
 
+#Custom Themes
+#ADD http://domain.com/themes.zip C:\\Appleseed\\Custom\\Themes
+
+#Custom Modules
+#ADD http://domain.com/modules.zip C:\\Appleseed\\Custom\\Modules
+
 #Make sure IIS comes up
 CMD Write-Host IIS Started... ;\
     while ($true) { Start-Sleep -Seconds 3600 }
