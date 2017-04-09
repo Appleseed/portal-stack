@@ -4,7 +4,7 @@ This is a Docker containerized stack for the Appleseed Portal Platform : https:/
 It allows enthusiasts, IT Pros, developers, and designers to quickly bring up Appleseed Portal enterprise configured containers.  The stack uses Windows 2016 Server Core, IIS, ASPNet 4.6.1, SQL Server 2016 Express.
 
 
-## Quickstart :##
+## Quickstart : 
 
 Configure and Install docker-machine, docker, and docker-compose on your machine or server.  Please note that by default this stack installs to port 80 of your site.  This may be configured in either the compose file or docker run command to bring up internally.  If brought up internally, firewall settings will have to be adjusted to the internal port assigned.
 
