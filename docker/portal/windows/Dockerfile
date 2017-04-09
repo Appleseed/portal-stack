@@ -57,7 +57,8 @@ RUN rm c:\\Services\\blat3217_64.full.zip
 #Copy C:\\Appleseed\\Portal\\Design\\ C:\\Appleseed\\Portal\\Design\\ 
 
 #Custom Modules
-#ADD http://domain.com/modules.zip C:\\Appleseed\\Custom\\Modules
+#Sample Script to copy custom Modules into your container
+#Copy C:\\Appleseed\\Portal\\DesktopModules\\ C:\\Appleseed\\Portal\\DesktopModules\\ 
 
 #Make sure IIS comes up
 CMD Write-Host IIS Started... ;\
