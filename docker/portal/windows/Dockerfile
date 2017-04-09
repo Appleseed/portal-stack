@@ -26,7 +26,7 @@ ADD https://github.com/Appleseed/portal/releases/download/v1.4.131.463/Appleseed
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.4.131.463.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
    
 #Cleanup
-RUN rm c:\\Appleseed\\Appleseed.Portal.1.4.98.383.zip
+RUN rm c:\\Appleseed\\Appleseed.Portal.1.4.131.463.zip
 
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  
