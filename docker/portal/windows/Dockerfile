@@ -1,4 +1,4 @@
-# Uses Appleseed.Portal Build v1.4.98.383 pre-release | 4/1/2017
+# Uses Appleseed.Portal Build v1.4.131.463 pre-release | 4/8/2017
  
 FROM microsoft/iis
 
@@ -20,7 +20,7 @@ RUN MD C:\\Appleseed ;\
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
-ADD https://github.com/Appleseed/portal/releases/download/v1.4.98.383/Appleseed.Portal.1.4.98.383.zip c:\\Appleseed
+ADD https://github.com/Appleseed/portal/releases/download/v1.4.131.463/Appleseed.Portal.1.4.131.463.zip c:\\Appleseed
 
 #Unzip the main archive
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.4.98.383.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
