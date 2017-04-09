@@ -23,7 +23,7 @@ WORKDIR C:\\Appleseed
 ADD https://github.com/Appleseed/portal/releases/download/v1.4.131.463/Appleseed.Portal.1.4.131.463.zip c:\\Appleseed
 
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.4.98.383.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.4.131.463.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
    
 #Cleanup
 RUN rm c:\\Appleseed\\Appleseed.Portal.1.4.98.383.zip
