@@ -20,13 +20,13 @@ RUN MD C:\\Appleseed ;\
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
-ADD https://github.com/Appleseed/portal/releases/download/v1.4.131.463/Appleseed.Portal.1.4.131.463.zip c:\\Appleseed
+ADD https://github.com/Appleseed/portal/releases/download/v1.5.142.485/Appleseed.Portal.1.5.142.485.zip c:\\Appleseed
 
 #Unzip the main archive
-RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.4.131.463.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
+RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.5.142.485.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
    
 #Cleanup
-RUN rm c:\\Appleseed\\Appleseed.Portal.1.4.131.463.zip
+RUN rm c:\\Appleseed\\Appleseed.Portal.1.5.142.485.zip
 
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site'  
