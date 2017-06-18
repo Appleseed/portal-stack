@@ -12,3 +12,6 @@ MAINTAINER ANANT Corporation www.anant.us | Report Issues : https://github.com/A
 RUN Install-WindowsFeature NET-Framework-45-ASPNET ;\
     Install-WindowsFeature Web-Asp-Net45 ;\
 	Install-WindowsFeature Web-Scripting-Tools 
+	
+
+#Setup Working Directories
