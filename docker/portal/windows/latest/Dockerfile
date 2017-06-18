@@ -35,4 +35,4 @@ RUN  New-Website   -Name 'Appleseed.Portal' -Port 80 -PhysicalPath 'c:\Appleseed
 
 #Make Web.config writable only for App Pool User
 RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
-
+    $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule('IIS_IUSRS','Write','Allow') ;\
