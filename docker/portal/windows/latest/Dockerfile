@@ -21,3 +21,4 @@ RUN MD C:\\Appleseed ;\
 WORKDIR C:\\Appleseed
 
 # Using Add for now.  To-do : Should use wget 
+ADD https://github.com/Appleseed/portal/releases/download/v1.5.142.485/Appleseed.Portal.1.5.142.485.zip c:\\Appleseed
