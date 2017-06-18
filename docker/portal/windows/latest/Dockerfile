@@ -17,3 +17,5 @@ RUN Install-WindowsFeature NET-Framework-45-ASPNET ;\
 #Setup Working Directories
 RUN MD C:\\Appleseed ;\
     MD C:\\Services
+	
+WORKDIR C:\\Appleseed
