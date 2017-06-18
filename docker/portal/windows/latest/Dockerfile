@@ -49,3 +49,4 @@ ADD https://downloads.sourceforge.net/project/blat/Blat%20Full%20Version/64%20bi
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Services\\blat3217_64.full.zip' -DestinationPath 'c:\\Services\\Mail'"
 
 #Cleanup
+RUN rm c:\\Services\\blat3217_64.full.zip
