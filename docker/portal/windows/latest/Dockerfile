@@ -31,3 +31,4 @@ RUN rm c:\\Appleseed\\Appleseed.Portal.1.5.142.485.zip
 
 #Remove the default IIS site and install Appleseed.Portal
 RUN Remove-WebSite -Name 'Default Web Site' 
+RUN  New-Website   -Name 'Appleseed.Portal' -Port 80 -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
