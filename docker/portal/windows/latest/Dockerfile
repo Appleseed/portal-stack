@@ -26,3 +26,4 @@ ADD https://github.com/Appleseed/portal/releases/download/v1.5.142.485/Appleseed
 #Unzip the main archive
 RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Appleseed\\Appleseed.Portal.1.5.142.485.zip' -DestinationPath 'c:\\Appleseed\\Portal'"
  
+#Cleanup
