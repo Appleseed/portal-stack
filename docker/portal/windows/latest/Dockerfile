@@ -38,3 +38,5 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
     $Ar = New-Object  system.security.accesscontrol.filesystemaccessrule('IIS_IUSRS','Write','Allow') ;\
 	$Acl.SetAccessRule($Ar) ;\
 	Set-Acl 'C:\Appleseed\Portal\Web.config' $Acl
+	
+	EXPOSE 80
