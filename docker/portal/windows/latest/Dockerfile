@@ -40,3 +40,5 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
 	Set-Acl 'C:\Appleseed\Portal\Web.config' $Acl
 	
 EXPOSE 80
+
+#STMP
