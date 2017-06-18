@@ -19,3 +19,5 @@ RUN MD C:\\Appleseed ;\
     MD C:\\Services
 	
 WORKDIR C:\\Appleseed
+
+# Using Add for now.  To-do : Should use wget 
