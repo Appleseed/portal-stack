@@ -50,3 +50,5 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Servi
 
 #Cleanup
 RUN rm c:\\Services\\blat3217_64.full.zip
+
+#Make sure IIS comes up
