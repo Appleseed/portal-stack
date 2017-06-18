@@ -30,3 +30,4 @@ RUN powershell -executionpolicy bypass -Command "expand-archive -Path 'c:\\Apple
 RUN rm c:\\Appleseed\\Appleseed.Portal.1.5.142.485.zip
 
 #Remove the default IIS site and install Appleseed.Portal
+RUN Remove-WebSite -Name 'Default Web Site' 
