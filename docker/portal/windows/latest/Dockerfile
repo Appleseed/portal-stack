@@ -34,3 +34,5 @@ RUN Remove-WebSite -Name 'Default Web Site'
 RUN  New-Website   -Name 'Appleseed.Portal' -Port 80 -PhysicalPath 'c:\Appleseed\Portal' -ApplicationPool '.NET v4.5'
 
 #Make Web.config writable only for App Pool User
+RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
+
