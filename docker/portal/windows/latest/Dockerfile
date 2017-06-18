@@ -39,4 +39,4 @@ RUN $Acl = Get-Acl 'C:\Appleseed\Portal\Web.config' ;\
 	$Acl.SetAccessRule($Ar) ;\
 	Set-Acl 'C:\Appleseed\Portal\Web.config' $Acl
 	
-	EXPOSE 80
+EXPOSE 80
